@@ -1,0 +1,82 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';
+
+$color: #E0E0E0;
+$workspace-font-color: #606060;
+$editor-border-color: red;
+$previewer-border-color: forestgreen;
+
+body, div, textarea {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+  color: brown;
+}
+
+body {
+  background-color: $color;
+}
+
+body, textarea {
+  font-family: 'Montserrat', sans-serif;
+  color: $workspace-font-color;
+  font-size: 24px;
+}
+
+.hOne {
+  padding: 0 20px;
+  background: -webkit-linear-gradient(#C8C8C8, black);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 56px;
+}
+
+.hTwo {
+  margin-top: -40px;
+  padding: 0 25px;
+  font-size: 16px;
+}
+
+.editor, .previewer {
+  padding: 0 10px 0 20px;
+  width: 50%;
+  height: 100vh;
+}
+
+.editor > textarea, .previewer > div {
+  border: 2px solid;
+  background-color: lighten($color, 20%);
+  padding: .25em;
+  display: block;
+  width: 100%;
+  height: 70%;
+}
+
+.editor {
+  float: left;
+   
+  textarea {
+    border-color: $editor-border-color;
+  }
+}
+
+.previewer {
+  float: right;
+   
+  div {
+    overflow: auto;
+    border-color: $previewer-border-color;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .editor, .previewer {
+    float: none; 
+    width: 100%;
+  }
+  .editor > textarea, .previewer > div {
+    height: 90%;
+  }
+}

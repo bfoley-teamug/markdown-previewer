@@ -1,0 +1,73 @@
+class Previewer extends React.Component {
+  render() {
+    return (
+      <div className='previewer'>
+        <h3>Preview Here</h3>
+        <div dangerouslySetInnerHTML={this.props.markup}></div>
+      </div>
+    )
+  }
+}
+
+class Editor extends React.Component {
+  render() {
+     return (
+      <div className='editor'>
+         <h3>Edit Here</h3>
+         <textarea 
+           onChange={this.props.onChange}
+           value={this.props.value}
+          >
+         </textarea>
+       </div>
+     )
+  }
+}
+
+class ShowMarkdownContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "# Hello\n## Goodbye\n**I say High**, you say *Low*.\n You say  Why?  And I say ~~I don't know~~\n 1. Hayla\n  * hayla-heyloa\n\n\n [Hello, Goodbye](https://en.wikipedia.org/wiki/Hello,_Goodbye), by The Beatles. "
+    };
+    
+    this.handleEdits = this.handleEdits.bind(this);
+    
+  }
+  
+  createMarkup() {
+    let options = { 
+      sanitize: true 
+    };
+    return {
+      __html: marked(this.state.text, options)
+    }
+  }
+  
+  handleEdits(e) {
+    this.setState({
+      text: e.target.value
+    });
+  }
+  
+  render() {
+    return (
+      <div>
+        <h1 className="hOne">Markdown Previewer</h1>
+        <h2 className="hTwo">A FreeCodeCamp Project</h2>
+        <Editor onChange={this.handleEdits} value={this.state.text} />
+        <Previewer markup={this.createMarkup()} />
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <ShowMarkdownContainer />
+    )
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
